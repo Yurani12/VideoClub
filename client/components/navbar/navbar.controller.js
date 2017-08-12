@@ -9,10 +9,7 @@ class NavbarController {
     'title': 'Home',
     'state': 'main'
   },{
-    'title': 'Usuarios',
-    'state': 'usuarios-list'
-  },{
-    'title': 'Crear Usuario',
+    'title': 'Nuevo Usuario',
     'state': 'usuarios-create'
   },{
     'title': 'Login',

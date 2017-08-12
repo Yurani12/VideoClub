@@ -17,6 +17,7 @@
         <!--<li><a ui-sref="usuarios-list">Usuarios</a></li>
         <li><a ui-sref="usuarios-create">Nuevo Usuario</a></li>
         <li><a ui-sref="login">Login</a></li>-->
+        <li ng-if="nav.AuthService.isAdmin()"><a ui-sref="usuarios-list">Usuarios</a><li>
         <li><a ng-click="nav.AuthService.logout()" href="#">Salir</a></li>
       </ul>
     </div>
