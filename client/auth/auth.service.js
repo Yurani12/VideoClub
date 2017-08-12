@@ -7,18 +7,15 @@ AuthService.$inject  = ['$auth','$state'];
 function AuthService($auth,$state){
 	var Auth = {
 		login:login,
-		logout:logout,
-		isAdmin:isAdmin,
-		idUsuario:idUsuario,
-		datosUsuario:datosUsuario,
-		isAuthenticated:isAuthenticated
-	}
+		isAuthenticated:isAuthenticated,
+		logout:logout
+	};
 
 	function login(user,collback){
 		$auth.login(user)
 		.then(response => {
 			console.log("Login ok",response);
-			
+
 			$state.go('main');
 		})
 		.catch(err =>{
@@ -27,49 +24,22 @@ function AuthService($auth,$state){
 		})
 	}
 
-	function logout(){
-		if($auth.isAuthenticated()){
-			$auth.logout()
-			.then(respose=>{
-				$state.go('main');
-			})
-		}
-
+function logout(){
+	if (Auth.isAuthenticated()) {
+		$auth.logout()
+		.then(response => {
+			$state.go('main');
+			console.log('salida ok');
+		})
 	}
-	function isAdmin(){
-		if(Auth.isAuthenticated()){
-			
-				if($auth.getPayload().roles.indexOf("ADMIN") !== -1){
-					return true;
-				}else{
-					return false;
-				}
-		}else{
-			return false;
-		}
-
+}
+function isAuthenticated(){
+	if($auth.isAuthenticated()){
+		return true;
+	}else{
+		return false;
 	}
-	
-	function datosUsuario(){
-		if(Auth.isAuthenticated()){
-
-			return $auth.getPayload().user;
-		}
-	}
-	function idUsuario(){
-		if(Auth.isAuthenticated()){
-			return $auth.getPayload().sub;
-		} else{
-			return null;
-		}
-	}
-	function isAuthenticated(){
-		if($auth.isAuthenticated()){
-			return true;
-		}else{
-			return false;
-		}
-	}
+}//final function auth
 
 	return Auth;
 

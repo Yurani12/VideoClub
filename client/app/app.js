@@ -11,7 +11,7 @@ angular.module('videoClubApp', [
   ])
 .constant("API","http://localhost:8080/adsi2017_backend_completo-master")
 .config(function(API, $authProvider){
-	$authProvider.loginURL = API + '/api/auth/login';
+	$authProvider.loginUrl = API + '/api/auth/login';
 	$authProvider.tokenName = 'token';
 	$authProvider.tokenPrefix = 'startUpApp';
 })
