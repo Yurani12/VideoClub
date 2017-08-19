@@ -10,7 +10,11 @@
 
 				<div class="form-group">
 					<label for="">Documento</label>
-					<input type="text" class="form-control" ng-model="vm.usuario.numDocumento">
+					<input type="text" ng-blur="vm.validarNumDocumento()" class="form-control" ng-model="vm.usuario.numDocumento">
+				</div>
+
+				<div ng-show="vm.showValidaDocumento" class="alert alert-danger" role="alert">
+					<p>El numero de documento ya se encuentra registrado</p>
 				</div>
 
 			 	<div class="form-group">
@@ -25,7 +29,11 @@
 
 				<div class="form-group">
 					<label for="">Email</label>
-					<input type="text" class="form-control" ng-model="vm.usuario.email">
+					<input type="text" ng-blur="vm.validarEmail()" class="form-control" ng-model="vm.usuario.email">
+				</div>
+
+				<div ng-show="vm.showValidaEmail" class="alert alert-danger" role="alert">
+					<p>El email ya existe</p>
 				</div>
 
 				<div class="form-group">

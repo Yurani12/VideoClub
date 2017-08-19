@@ -5,6 +5,7 @@
 class UsuariosCreateComponent {
   constructor(usuariosService) {
     this.usuariosService = usuariosService;
+    this.showValidaDocumento = false;
   }
 
   createUser(){
@@ -15,6 +16,28 @@ class UsuariosCreateComponent {
   	.catch(err=>{
   		console.log("Error al crear el usuario ",err);
   	})
+  }
+  validarNumDocumento(){
+    console.log("NumDocumento", this.usuario.numDocumento);
+    this.usuariosService.query({numDocumento:this.usuario.numDocumento}).$promise
+    .then(response => {
+      console.log("Valida", response);
+      this.showValidaDocumento = true;
+    })
+    .catch(err => {
+      console.log("error". err);
+    })
+  }
+  validarEmail(){
+    console.log("Email",this.usuario.email);
+    this.usuariosService.query({email:this.usuario.email}).$promise
+    .then(response => {
+      console.log("Valida", response);
+      this.showValidaEmail = true;
+    })
+    .catch(err =>{
+      console.log("error", err);
+    })
   }
 }
 UsuariosCreateComponent.$inject = ['usuariosService'];
