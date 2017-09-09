@@ -12,19 +12,18 @@
 
 				<div class="form-group">
 					<label>Documento</label>
-					<input
+					<input class="form-control"
 					type="text"
 					name="numDocumento"
 					required
 					minlength="7"
 					maxlength="11"
-					ng-pattern="/^[0-9]{1,20}&/"
-					ng-model="vm.usuario.numDocumento" class="form-control">
+					ng-pattern="/^[0-9]{1,20}$/"
+					ng-model="vm.usuario.numDocumento">
 
 					<div class=""
 						ng-messages="userForm.numDocumento.$error"
-						ng-show="userForm.numDocumento"
-						ng-if="userForm.numDocumento.$dirty">
+						ng-show="userForm.numDocumento.$dirty">
 
 						<div class="alert alert-danger" role="alert" ng-message="required">
 								<p>Este campo es requerido</p>
@@ -62,7 +61,8 @@
 
 				<div class="form-group">
 					<label for="">Email</label>
-					<input type="text" ng-blur="vm.validarEmail()"
+					<input
+					type="email"
 					class="form-control"
 					name="email"
 					ng-model="vm.usuario.email"
@@ -76,7 +76,7 @@
 							<p>este campo es requerido</p>
 					</div>
 
-					<div class="alert alert-danger" role="alert" ng-message="required">
+					<div class="alert alert-danger" role="alert" ng-message="pattern">
 							<p>ingrese un email valido</p>
 					</div>
 					</div>
