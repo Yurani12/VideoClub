@@ -17,8 +17,13 @@
         <!--<li><a ui-sref="usuarios-list">Usuarios</a></li>
         <li><a ui-sref="usuarios-create">Nuevo Usuario</a></li>
         <li><a ui-sref="login">Login</a></li>-->
-        <li ng-if="nav.AuthService.isAdmin()"><a ui-sref="usuarios-list">Usuarios</a><li>
-        <li><a ng-click="nav.AuthService.logout()" href="#">Salir</a></li>
+        <li ng-if="nav.AuthService.isAuthenticated()"><a ui-sref="usuarios-list">Lista de usuarios</a></li>
+        <li ng-if="nav.AuthService.isAuthenticated()"><a ui-sref="editaPerfil">Edital Perfil</a></li>
+        <li ng-if="nav.AuthService.isAuthenticated()"><a ui-sref="usuarios-create">Crear Usuario</a></li>
+        <li ng-if="!nav.AuthService.isAuthenticated()"><a ui-sref="login">Login</a></li>
+        <li ng-if="!nav.AuthService.isAuthenticated()"><a ui-sref="tienda">Tienda</a></li>
+        <!--<li><a ui-sref="usuarios-create">Crear Usuario</a><li>-->
+        <li ng-if="nav.AuthService.isAuthenticated()"><a ng-click="nav.AuthService.logout()" href="#">Salir</a></li>
       </ul>
     </div>
   </div>

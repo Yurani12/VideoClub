@@ -3,12 +3,13 @@
 (function(){
 
 class UsuariosUpdateComponent {
-	constructor(usuariosService,$stateParams,$state,ciudadesService, departamentosService){
+	constructor(usuariosService,$stateParams,$state,ciudadesService, departamentosService, NavegateParams){
 		this.usuariosService = usuariosService;
 		this.ciudadesService = ciudadesService;
 		this.departamentosService = departamentosService;
 		this.$stateParams = $stateParams;
 		this.$state = $state;
+		this.NavegateParams = NavegateParams;
 	}
 	$onInit(){
 		this.departamentosService.query().$promise
@@ -17,13 +18,13 @@ class UsuariosUpdateComponent {
 		})
 		.catch(err => console.error(err));
 
-		this.usuariosService.get({id:this.$stateParams.idUsuario}).$promise
-		.then(response => {
-			this.usuario = response;
-			console.log(this.usuario);
-		})
-		.catch(err => console.error(err));
-	}
+	this.usuariosService.get({id:this.NavegateParams.getData('idUsuario')}).$promise
+	.then(response => {
+		this.usuario = response;
+		console.log(this.usuario);
+	})
+	.catch(err => console.error(err));
+  }
 
 	getCiudades(){
 		this.ciudadesService.getCiudades({idDepartamento:this.idDepartamento}).$promise

@@ -8,9 +8,15 @@ angular.module('videoClubApp', [
     'ui.router',
     'ui.bootstrap',
 		'satellizer',
-		'ngMessages'
+		'ngMessages',
+		'ngMaterial',
+		'LocalStorageModule',
+		'md.data.table'
   ])
-.constant("API","http://localhost:8080/adsi2017_backend_completo-master")
+	/*
+	http://localhost:8080/adsi2017_backend_completo-master
+	*/
+.constant("API","http://localhost:8080/Tienda")
 .config(function(API, $authProvider){
 	$authProvider.loginUrl = API + '/api/auth/login';
 	$authProvider.tokenName = 'token';
@@ -21,4 +27,9 @@ angular.module('videoClubApp', [
     $urlRouterProvider.otherwise('/');
 
     $locationProvider.html5Mode(true);
-  });
+  })
+.config(function (localStorageServiceProvider) {
+	localStorageServiceProvider
+	.setPrefix('lSVideoClub')
+	.setStorageType('localStorage');
+})

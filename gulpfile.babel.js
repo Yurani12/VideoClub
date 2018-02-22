@@ -513,9 +513,9 @@ gulp.task('build:client', ['styles', 'html', 'constant', 'build:images'], () => 
                 .pipe(plugins.uglify())
             .pipe(jsFilter.restore)
             .pipe(cssFilter)
-                .pipe(plugins.cleanCss({
+               /* .pipe(plugins.cleanCss({
                     processImportFrom: ['!fonts.googleapis.com']
-                }))
+                }))*/
             .pipe(cssFilter.restore)
             .pipe(htmlBlock)
                 .pipe(plugins.rev())

@@ -3,25 +3,27 @@
 angular.module("videoClubApp")
 .factory('AuthService',AuthService);
 
-AuthService.$inject  = ['$auth','$state'];
-function AuthService($auth,$state){
+function AuthService($auth,$state, localStorageService){
 	var Auth = {
 		login:login,
 		isAuthenticated:isAuthenticated,
 		logout:logout,
-		isAdmin:isAdmin
+		isAdmin:isAdmin,
+		getRoles: getRoles,
+		getIdUser: getIdUser
 	};
 
 	function login(user,collback){
 		$auth.login(user)
 		.then(response => {
 			console.log("Login ok",response);
-
 			$state.go('main');
+			localStorageService.set('idUsuarioLogeado',Auth.getIdUser());
 		})
 		.catch(err =>{
 			console.log("Error de login");
 			$state.go('login');
+
 		})
 	}
 
@@ -41,6 +43,22 @@ function isAuthenticated(){
 		return false;
 	}
 }//final function auth
+ /* Toma todos los roles*/
+ function getRoles(){
+  if (Auth.isAuthenticated()) {
+ 	 return $auth.getPayload().roles
+  }else {
+ 	 return false;
+  }
+ }
+
+ function getIdUser() {
+	 if (Auth.isAuthenticated()) {
+		return $auth.getPayload().sub
+	 }else {
+		return false;
+	 }
+ }
 
 function isAdmin(){
 	if(Auth.isAuthenticated()){

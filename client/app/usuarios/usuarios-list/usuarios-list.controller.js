@@ -3,8 +3,15 @@
 (function(){
 
 class UsuariosListComponent {
-  constructor(usuariosService) {
+  constructor(usuariosService, NavegateParams, $state) {
     this.usuariosService = usuariosService;
+    this.NavegateParams = NavegateParams;
+    this.$state = $state;
+
+    this.query = {
+      limit: 4,
+      page: 1
+    };
   }
 
   $onInit(){
@@ -19,9 +26,13 @@ class UsuariosListComponent {
 
 
   }
+  goUpadateUser(idUser){
+    this.NavegateParams.setData('idUsuario',idUser)
+    this.$state.go("usuarios-update")
+  }
 }
 
-UsuariosListComponent.$inject = ['usuariosService'];
+UsuariosListComponent.$inject = ['usuariosService', 'NavegateParams', '$state'];
 angular.module('videoClubApp')
   .component('usuariosList', {
     templateUrl: 'app/usuarios/usuarios-list/usuarios-list.html',

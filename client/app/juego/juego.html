@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <input type="text" placeholder="Ingrese una letra" ng-keydown="vm.letraJugador = $event">
+      <button type="button" ng-click="vm.verificar()" name="button">Ingresar</button>
+      <div class="Inline-block Padding-sides" ng-repeat="item in vm.letras track by $index">
+        <p>{{item}}</p>
+      </div>
+      <p ng-show="vm.intentos <= 9">--o--</p>
+      <p ng-show="vm.intentos <= 8" class="Inline-block">./</p>
+      <p ng-show="vm.intentos <= 7" class="Inline-block">|</p>
+      <p ng-show="vm.intentos <= 6" class="Inline-block">\.</p>
+      <div class="">
+        <p ng-show="vm.intentos <= 5" class="Inline-block">_/</p>
+        <p ng-show="vm.intentos <= 4" class="Inline-block">\_</p>
+      </div>
+      <p ng-show="">
+        Ganaste!
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,23 +1,76 @@
-<section class="container" ng-cloak="">
-	
-	<div>This is the usuarios-list view.</div>
+<section class="container Yurani" ng-cloak="">
 
-	<table class="table table-hover">
+	<h3 class="Titulo">TODOS LOS USUARIOS REGISTRADOS</h3>
+
+	<!--table class="table table-hover">
 		<thead>
 			<tr>
 				<th>Nombres</th>
 				<th>Apellidos</th>
 				<th>Email</th>
+				<th>Numero de documento</th>
+				<th>Swith</th>
 				<th>Acción</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr ng-repeat="item in vm.usuarios">
+			<tr ng-repeat="item in vm.usuarios" >
 				<td>{{item.nombres}}</td>
 				<td>{{item.apellidos}}</td>
 				<td>{{item.email}}</td>
-				<td><a class="btn btn-primary" ui-sref="usuarios-update({idUsuario:item.id})">Editar</a></td>
+				<td>{{item.numDocumento}}</td>
+
+				<td class="inset">
+					<md-switch class="" ng-model="data.cb1" aria-label="Switch 1">
+  			 		{{ data.cb1 }}
+  	 			</md-switch>
+				</td>
+
+				<td><a class="btn btn-primary" ng-click="vm.goUpadateUser(item.id)">Editar</a></td>
 			</tr>
 		</tbody>
-	</table>
+	</table-->
+
+	<!--MD DATA DABLE -->
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h3 class="panel-title"> Filtrar</h3>
+			<input type="text" class="form-control" ng-model="vm.filtro">
+		</div>
+		<div class="panel-body">
+
+		<md-table-container>
+			<table md-table>
+				<thead md-head>
+					<tr md-row>
+						<th md-column>Nombres</th>
+						<th md-column>Apellidos</th>
+						<th md-column>Email</th>
+						<th md-column>Numero de documento</th>
+					</tr>
+				</thead>
+				<tbody md-body>
+					<tr md-row ng-repeat="item in vm.usuarios | limitTo:
+					vm.query.limit: (vm.query.page - 1) * vm.query.limit |
+					filter: vm.filtro">
+						<td md-cell >{{item.nombres}}</td>
+						<td md-cell >{{item.apellidos}}</td>
+						<td md-cell >{{item.email}}</td>
+						<td md-cell >{{item.numDocumento}}</td>
+						<td md-cell ><a class="btn btn-primary" ng-click="vm.goUpadateUser(item.id)">Editar</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</md-table-container>
+
+		<md-table-pagination
+				md-limit = "vm.query.limit"
+				md-limit-options = "[5,10,15]"
+				md-page = "vm.query.page"
+				md-total = "{{vm.usuarios.length}}">
+		</md-table-pagination>
+
+	</div>
+</div>
+	<!--MD DATA TABLE  -->
 </section>

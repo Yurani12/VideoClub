@@ -1,110 +1,146 @@
 <div class="container">
-	<div class="row">
+	<div class="row Usuario">
 		<div class="yurani col-xs-10 col-xs-push-1 col-sm-8 col-sm-push-2 col-md-4 col-md-push-4">
-			<h2 class="text-center">REGÍSTRESE...</h2>
 
-			<form name="userForm" ng-submit="userForm.$valid && vm.createUser()"> <!--valid returna true -->
+			<div class="">
+
+				<h2 class="text-center">REGÍSTRESE...</h2>
+
+			<!--	<div class="form-group">
+				  <label for=""> Seleccione el tipo de seguro</label>
+				    <select class="form-group"ng-model="vm.ventas.idTipoSeguro.id">
+				      <option ng-value="tipo.id" ng-repeat="tipo in vm.tipos">{{tipo.tipo}}</option>
+				    </select>
+				</div>-->
+
+				<form name="userForm" ng-submit="vm.createUser()"> <!--valid returna true -->
+
 				<div class="form-group">
 					<label for="">Tipo Documento</label>
-					<input type="text" class="form-control" ng-model="vm.usuario.tipoDocumento.id">
+						<select class="form-group" ng-model="vm.usuario.tipoDocumento.id">
+							<option ng-value="descripcion.id" ng-repeat="descripcion in vm.descripcion">{{descripcion.descripcion}}</option>
+						</select>
 				</div>
 
 
-				<div class="form-group">
-					<label>Documento</label>
-					<input class="form-control"
-					type="text"
-					name="numDocumento"
-					required
-					minlength="7"
-					maxlength="11"
-					ng-pattern="/^[0-9]{1,20}$/"
-					ng-model="vm.usuario.numDocumento">
+					<div class="form-group">
+						<label>Documento</label>
+						<input class="form-control"
+						type="text"
+						name="numDocumento"
+						required
+						minlength="7"
+						maxlength="11"
+						ng-pattern="/^[0-9]{1,20}$/"
+						ng-model="vm.usuario.numDocumento">
 
-					<div class=""
-						ng-messages="userForm.numDocumento.$error"
-						ng-show="userForm.numDocumento.$dirty">
+						<div class=""
+							ng-messages="userForm.numDocumento.$error"
+							ng-show="userForm.numDocumento.$dirty">
 
+							<div class="alert alert-danger" role="alert" ng-message="required">
+									<p>Este campo es requerido</p>
+							</div>
+
+							<div class="alert alert-danger" role="alert" ng-message="minlength">
+								<p>Este campo de ser minimo 7 caracteres</p>
+							</div>
+
+							<div class="alert alert-danger" role="alert" ng-message="maxlength">
+								<p>Este campo de ser minimo 11 caracteres</p>
+							</div>
+
+							<div class="alert alert-danger" role="alert" ng-message="pattern">
+								<p>Este campo solo admite numeros
+								</p>
+							</div>
+
+						</div>
+					</div>
+
+					<div ng-show="vm.showValidaDocumento" class="alert alert-danger" role="alert">
+						<p>El numero de documento ya se encuentra registrado</p>
+					</div>
+
+					<div class="form-group">
+						<label for="">Apellidos</label>
+						<input type="text" class="form-control" ng-model="vm.usuario.apellidos">
+					</div>
+
+					<div class="form-group">
+						<label for="">Nombres</label>
+						<input type="text" class="form-control"ng-model="vm.usuario.nombres">
+					</div>
+
+					<div class="form-group">
+						<label for="">Email</label>
+						<input
+						type="email"
+						class="form-control"
+						name="email"
+						ng-model="vm.usuario.email"
+						required
+						ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/">
+
+						<div class=""
+						ng-messages="userForm.email.$error"
+						ng-show="userForm.email.$dirty">
 						<div class="alert alert-danger" role="alert" ng-message="required">
-								<p>Este campo es requerido</p>
-						</div>
-
-						<div class="alert alert-danger" role="alert" ng-message="minlength">
-							<p>Este campo de ser minimo 7 caracteres</p>
-						</div>
-
-						<div class="alert alert-danger" role="alert" ng-message="maxlength">
-							<p>Este campo de ser minimo 11 caracteres</p>
+								<p>este campo es requerido</p>
 						</div>
 
 						<div class="alert alert-danger" role="alert" ng-message="pattern">
-							<p>Este campo solo admite numeros
-							</p>
+								<p>ingrese un email valido</p>
 						</div>
-
-					</div>
-				</div>
-
-				<div ng-show="vm.showValidaDocumento" class="alert alert-danger" role="alert">
-					<p>El numero de documento ya se encuentra registrado</p>
-				</div>
-
-			 	<div class="form-group">
-					<label for="">Apellidos</label>
-					<input type="text" class="form-control" ng-model="vm.usuario.apellidos">
-			 	</div>
-
-				<div class="form-group">
-					<label for="">Nombres</label>
-					<input type="text" class="form-control"ng-model="vm.usuario.nombres">
-				</div>
-
-				<div class="form-group">
-					<label for="">Email</label>
-					<input
-					type="email"
-					class="form-control"
-					name="email"
-					ng-model="vm.usuario.email"
-					required
-					ng-pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/">
-
-					<div class=""
-					ng-messages="userForm.email.$error"
-					ng-show="userForm.email.$dirty">
-					<div class="alert alert-danger" role="alert" ng-message="required">
-							<p>este campo es requerido</p>
+						</div>
 					</div>
 
-					<div class="alert alert-danger" role="alert" ng-message="pattern">
-							<p>ingrese un email valido</p>
+					<div ng-show="vm.showValidaEmail" class="alert alert-danger" role="alert">
+						<p>El email ya existe</p>
 					</div>
+
+					<div class="form-group">
+						<label for="">password</label>
+						<input type="password" class="form-control" ng-model="vm.usuario.password">
 					</div>
-				</div>
+						<label>Sexo</label>
+						<input type="text" class="form-control" ng-model="vm.usuario.sexo">
+					</div>
 
+					<div class="form-group">
+						<label for="">Ciudad</label>
 
+					<!--autocomplete-->
+					<md-autocomplete
 
-				<div ng-show="vm.showValidaEmail" class="alert alert-danger" role="alert">
-					<p>El email ya existe</p>
-				</div>
+          md-selected-item="vm.selectedItem"
+          md-search-text="vm.searchText"
+          md-selected-item-change="vm.selectedItemChange(item)"
+          md-items="item in vm.querySearch(vm.searchText)"
+          md-item-text="item.nombre"
+          md-min-length="0"
+          placeholder="Pick an Angular repository"
+          md-menu-class="autocomplete-custom-template">
+        <md-item-template>
+					<span class="item-title">
+            <span> <strong>{{item.nombre}} </span>
+          </span>
 
-				<div class="form-group">
-					<label for="">password</label>
-					<input type="password" class="form-control" ng-model="vm.usuario.password">
-				</div>
+					<span class="item-metadata">
+            <span>
+              {{item.departamento.nombre}}</strong>
+            </span>
+          </span>
 
-				<div class="form-group">
-					<label for="">Sexo</label>
-					<input type="text" class="form-control" ng-model="vm.usuario.sexo">
-				</div>
+        </md-item-template>
 
-				<div class="form-group">
-					<label for="">Ciudad</label>
-					<input type="text" class="form-control" ng-model="vm.usuario.ciudad.id">
-				</div>
+      </md-autocomplete>
+			</div>
+					<!--autocomplete-->
 
-				<button class="btn btn-primary btn-lg" type="submit" ng-disabled="userForm.$invalid">Registrar</button>
-			</form>
+					<button class="btn btn-primary btn-lg" type="submit" ng-click="vm.createUser()">Registrar</button>
+				</form>
+			</div>
 		</div>
 	</div>
 </div>
